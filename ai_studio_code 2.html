@@ -1,0 +1,740 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Showroom iPhone — Bengkulu</title>
+  <meta name="description" content="Katalog iPhone second resmi berkualitas di Bengkulu. Battery Health jujur, pengecekan 3uTools, garansi 30 hari, dan bisa tukar tambah." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0B0B0C;
+      --surface: #141416;
+      --surface-2: #1A1A1E;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-strong: rgba(255, 255, 255, 0.14);
+      --text: #F5F5F7;
+      --muted: #A1A1AA;
+      --accent: #FFCC00;
+      --accent-hover: #FFD633;
+      --green: #34D399;
+      --amber: #FBBF24;
+      --red: #F87171;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+    .mono { font-family: 'JetBrains Mono', monospace; font-variant-numeric: tabular-nums; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+    button, input, select { font-family: inherit; }
+    button { cursor: pointer; border: none; background: none; color: inherit; }
+    a { color: inherit; text-decoration: none; }
+
+    /* Header */
+    header {
+      position: sticky; top: 0; z-index: 40;
+      background: rgba(11, 11, 12, 0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border); height: 64px;
+    }
+    .header-inner {
+      height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    }
+    .brand { font-size: 18px; font-weight: 700; color: #fff; white-space: nowrap; }
+    nav.desktop-nav { display: flex; align-items: center; gap: 22px; }
+    nav.desktop-nav a, nav.desktop-nav button {
+      font-size: 14px; font-weight: 500; color: var(--muted); white-space: nowrap;
+      padding: 4px 0; border-bottom: 2px solid transparent; transition: 0.15s;
+    }
+    nav.desktop-nav a:hover, nav.desktop-nav button:hover { color: #fff; border-bottom-color: rgba(255,255,255,0.3); }
+    .btn-primary {
+      background: var(--accent); color: #000; font-weight: 600; font-size: 13px;
+      padding: 9px 16px; border-radius: 8px; display: inline-flex; align-items: center; gap: 8px;
+      white-space: nowrap; transition: 0.15s;
+    }
+    .btn-primary:hover { background: var(--accent-hover); }
+    .btn-secondary {
+      background: var(--surface-2); color: #fff; border: 1px solid var(--border-strong);
+      font-weight: 500; font-size: 13px; padding: 9px 16px; border-radius: 8px;
+      display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; transition: 0.15s;
+    }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* Hero */
+    .hero { padding: 56px 0 44px; border-bottom: 1px solid var(--border); }
+    .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 32px; align-items: center; }
+    .hero h1 { font-size: clamp(30px, 4vw, 48px); line-height: 1.12; font-weight: 700; margin-bottom: 14px; }
+    .hero p { color: var(--muted); font-size: 15px; max-width: 560px; margin-bottom: 24px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .hero-box {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 24px;
+    }
+    .hero-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .stat-card { background: var(--surface-2); border: 1px solid var(--border); border-radius: 10px; padding: 14px; }
+    .stat-val { font-size: 20px; font-weight: 700; color: var(--accent); }
+    .stat-lbl { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+    /* Sections */
+    section { padding: 48px 0; border-bottom: 1px solid var(--border); }
+    .sec-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 22px; }
+    .sec-head h2 { font-size: 26px; font-weight: 700; }
+    .sec-sub { font-size: 14px; color: var(--muted); margin-top: 4px; }
+
+    /* Filters */
+    .filter-bar { display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+    .filter-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; }
+    .tabs {
+      display: flex; gap: 4px; padding: 4px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 10px; overflow-x: auto; max-width: 100%;
+    }
+    .tab-btn {
+      padding: 7px 12px; border-radius: 7px; font-size: 13px; font-weight: 500; color: var(--muted); white-space: nowrap;
+    }
+    .tab-btn.active { background: var(--accent); color: #000; font-weight: 600; }
+    .input, select.input {
+      background: var(--surface); border: 1px solid var(--border-strong); color: #fff;
+      border-radius: 8px; padding: 9px 12px; font-size: 13px; outline: none;
+    }
+    .input:focus { border-color: var(--accent); }
+
+    /* Product Grid */
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+    .card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+      overflow: hidden; display: flex; flex-direction: column; transition: transform 0.18s, border-color 0.18s;
+    }
+    .card:hover { transform: translateY(-2px); border-color: rgba(255, 204, 0, 0.45); }
+    .card-media {
+      aspect-ratio: 4 / 3; background: #18181C; position: relative;
+      display: flex; align-items: center; justify-content: center; overflow: hidden;
+    }
+    .card-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .card-body { padding: 18px; display: flex; flex-direction: column; flex: 1; gap: 10px; }
+    .meta-line { font-size: 12px; color: var(--muted); }
+    .card-title { font-size: 17px; font-weight: 700; color: #fff; }
+    .card-price { font-size: 20px; font-weight: 700; color: var(--accent); }
+    .card-actions { margin-top: auto; padding-top: 10px; display: flex; gap: 8px; }
+    .card-actions .btn-primary { flex: 1; justify-content: center; }
+
+    /* Panel & Forms */
+    .panel { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 24px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+    .stock-row {
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px;
+      padding: 14px 16px; background: var(--surface-2); border: 1px solid var(--border); border-radius: 10px;
+    }
+    .stepper { display: inline-flex; align-items: center; background: var(--bg); border: 1px solid var(--border-strong); border-radius: 8px; padding: 2px; }
+    .stepper button { width: 30px; height: 30px; border-radius: 6px; font-weight: 700; }
+    .stepper button:hover:not(:disabled) { background: rgba(255,255,255,0.08); }
+    .stepper button:disabled { opacity: 0.35; cursor: not-allowed; }
+    .stepper span { min-width: 68px; text-align: center; font-size: 12px; font-weight: 600; }
+
+    /* Modals */
+    .modal-backdrop {
+      position: fixed; inset: 0; z-index: 60; background: rgba(0,0,0,0.78); backdrop-filter: blur(4px);
+      display: none; align-items: center; justify-content: center; padding: 16px;
+    }
+    .modal-backdrop.open { display: flex; }
+    .modal-card {
+      width: 100%; max-width: 640px; max-height: 90vh; overflow-y: auto;
+      background: var(--surface); border: 1px solid var(--border-strong); border-radius: 14px; padding: 24px;
+    }
+
+    /* Footer & Mobile */
+    footer { padding: 28px 0 84px; background: var(--bg); font-size: 13px; color: var(--muted); }
+    .footer-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; }
+    .mobile-bar {
+      display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 45; height: 56px;
+      background: rgba(11,11,12,0.96); border-top: 1px solid var(--border);
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .mobile-bar a, .mobile-bar button {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      font-size: 11px; color: var(--muted);
+    }
+    .hidden { display: none !important; }
+
+    @media (max-width: 960px) {
+      .hero-grid, .grid-3, .grid-4, .grid-2 { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      nav.desktop-nav { display: none; }
+      .mobile-bar { display: grid; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container header-inner">
+      <a href="#top" class="brand">Showroom iPhone</a>
+      <nav class="desktop-nav">
+        <a href="#stok">Stok Unit</a>
+        <a href="#kelola-stok" id="nav-admin-link" class="hidden">Kelola Stok</a>
+        <a href="#tukar">Tukar Tambah</a>
+        <a href="#lokasi">Lokasi</a>
+      </nav>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <button type="button" class="btn-secondary" id="btn-share-open">Bagikan</button>
+        <a class="btn-primary" href="https://wa.me/628154047831?text=Halo%20Showroom%20iPhone%20Bengkulu,%20saya%20ingin%20tanya%20stok%20ready." target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <h1>iPhone Second Berkualitas di Bengkulu</h1>
+          <p>Semua unit lolos pengecekan 3uTools, Battery Health jujur tanpa suntik, garansi mesin 30 hari, serta siap COD langsung di cabang Bengkulu atau kirim berasuransi.</p>
+          <div class="hero-actions">
+            <a href="#stok" class="btn-primary">Lihat Stok Unit</a>
+            <a href="#tukar" class="btn-secondary">Hitung Tukar Tambah</a>
+          </div>
+        </div>
+        <div class="hero-box">
+          <div class="hero-stats">
+            <div class="stat-card"><div class="stat-val mono">100%</div><div class="stat-lbl">Part &amp; 3uTools Terverifikasi</div></div>
+            <div class="stat-card"><div class="stat-val mono">30 Hari</div><div class="stat-lbl">Garansi Fungsi Showroom</div></div>
+            <div class="stat-card"><div class="stat-val">Bengkulu</div><div class="stat-lbl">Cabang Tunggal Resmi</div></div>
+            <div class="stat-card"><div class="stat-val">IDR</div><div class="stat-lbl">Transaksi Tunai / Transfer</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Katalog -->
+    <section id="stok">
+      <div class="container">
+        <div class="sec-head">
+          <div>
+            <h2>Stok Unit Tersedia</h2>
+            <p class="sec-sub" id="catalog-count">Memuat daftar unit terbaru...</p>
+          </div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <input id="search-input" class="input" type="search" placeholder="Cari seri, warna, GB..." />
+            <select id="sort-select" class="input">
+              <option value="series-asc">Seri: iPhone 11 – 17</option>
+              <option value="series-desc">Seri: iPhone 17 – 11</option>
+              <option value="price-asc">Harga Terendah</option>
+              <option value="price-desc">Harga Tertinggi</option>
+              <option value="bh-desc">Battery Health Tertinggi</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="filter-bar">
+          <div class="filter-row">
+            <div class="tabs" id="series-tabs"></div>
+            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+              <select id="storage-filter" class="input"></select>
+              <select id="color-filter" class="input"></select>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-3" id="catalog-grid"></div>
+      </div>
+    </section>
+
+    <!-- Tukar Tambah & Standar QC -->
+    <section id="tukar" style="background:#0E0E10;">
+      <div class="container">
+        <div class="sec-head">
+          <div>
+            <h2>Tukar Tambah &amp; Standar QC</h2>
+            <p class="sec-sub">Hitung estimasi tukar tambah iPhone lama Anda atau lihat 8 poin inspeksi wajib kami.</p>
+          </div>
+          <div class="tabs">
+            <button type="button" class="tab-btn active" data-tooltab="tukar">Tukar Tambah</button>
+            <button type="button" class="tab-btn" data-tooltab="qc">Standar QC</button>
+          </div>
+        </div>
+
+        <div id="tool-tukar" class="grid-2">
+          <div class="panel" style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+            <div style="grid-column:1 / -1;">
+              <label style="display:block; font-size:12px; color:var(--muted); margin-bottom:6px;">iPhone Lama Anda</label>
+              <select id="ti-model" class="input" style="width:100%;"></select>
+            </div>
+            <div>
+              <label style="display:block; font-size:12px; color:var(--muted); margin-bottom:6px;">Kapasitas</label>
+              <select id="ti-storage" class="input" style="width:100%;">
+                <option>64GB</option><option>128GB</option><option selected>256GB</option><option>512GB</option><option>1TB</option><option>2TB</option>
+              </select>
+            </div>
+            <div>
+              <label style="display:block; font-size:12px; color:var(--muted); margin-bottom:6px;">Battery Health</label>
+              <select id="ti-bh" class="input" style="width:100%;">
+                <option value="1">90% – 100%</option>
+                <option value="0.94" selected>85% – 89%</option>
+                <option value="0.87">80% – 84%</option>
+                <option value="0.78">&lt; 80%</option>
+              </select>
+            </div>
+            <div>
+              <label style="display:block; font-size:12px; color:var(--muted); margin-bottom:6px;">Kondisi Fisik</label>
+              <select id="ti-body" class="input" style="width:100%;">
+                <option value="1">Mulus Normal</option>
+                <option value="0.91">Lecet Halus</option>
+                <option value="0.76">Ada Minus</option>
+              </select>
+            </div>
+            <div>
+              <label style="display:block; font-size:12px; color:var(--muted); margin-bottom:6px;">Unit Tujuan</label>
+              <select id="ti-target" class="input" style="width:100%;"></select>
+            </div>
+          </div>
+
+          <div class="panel" style="display:flex; flex-direction:column; justify-content:space-between; gap:18px;">
+            <div>
+              <div style="font-size:12px; color:var(--muted); margin-bottom:10px;">Ringkasan Estimasi</div>
+              <div style="display:flex; justify-content:space-between; font-size:14px; margin-bottom:8px;">
+                <span style="color:var(--muted);">Harga Unit Tujuan</span>
+                <span id="ti-target-price" class="mono"></span>
+              </div>
+              <div style="display:flex; justify-content:space-between; font-size:14px; padding-bottom:12px; border-bottom:1px solid var(--border);">
+                <span style="color:var(--muted);">Estimasi Unit Lama</span>
+                <span id="ti-old-val" class="mono" style="color:var(--green);"></span>
+              </div>
+              <div style="margin-top:14px;">
+                <div style="font-size:12px; color:var(--muted);">Estimasi Selisih Tambah</div>
+                <div id="ti-topup" class="mono" style="font-size:28px; font-weight:700; color:var(--accent); margin-top:4px;"></div>
+              </div>
+            </div>
+            <a id="ti-wa" href="#" target="_blank" rel="noopener" class="btn-primary" style="justify-content:center; padding:12px;">Ajukan Tukar Tambah via WhatsApp</a>
+          </div>
+        </div>
+
+        <div id="tool-qc" class="panel hidden">
+          <h3 style="font-size:18px; margin-bottom:6px;">Standar Inspeksi Wajib Sebelum Dipajang</h3>
+          <p class="sec-sub" style="margin-bottom:20px;">Setiap unit wajib lolos seluruh poin berikut dan dapat dicek ulang bersama saat serah terima.</p>
+          <div class="grid-4" id="qc-grid"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lokasi -->
+    <section id="lokasi">
+      <div class="container">
+        <div class="sec-head">
+          <div>
+            <h2>Cabang Bengkulu</h2>
+            <p class="sec-sub">Kunjungi langsung untuk cek fisik, tes 3uTools, atau transaksi COD di Bengkulu.</p>
+          </div>
+          <a href="https://maps.apple/p/NFuwzL0gwTdMU3" target="_blank" rel="noopener" class="btn-primary">Buka Titik Maps Bengkulu</a>
+        </div>
+        <div class="panel grid-2">
+          <div>
+            <h3 style="font-size:18px; margin-bottom:8px;">Showroom iPhone — Bengkulu</h3>
+            <p style="font-size:14px; color:var(--muted); margin-bottom:12px;">Buka setiap hari pukul 10.00 – 21.00 WIB. Tersedia pengecekan unit lengkap, transfer data iCloud aman, dan garansi 30 hari.</p>
+            <div class="mono" style="font-size:13px; color:var(--accent);">WhatsApp Admin: +62 815-4047-831</div>
+          </div>
+          <div style="display:flex; flex-direction:column; justify-content:center; gap:10px;">
+            <div style="font-size:13px; color:var(--muted);">Titik Lokasi Resmi:</div>
+            <a href="https://maps.apple/p/NFuwzL0gwTdMU3" target="_blank" rel="noopener" class="btn-secondary" style="justify-content:center;">https://maps.apple/p/NFuwzL0gwTdMU3</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Kelola Stok (Terkunci Khusus Pemilik) -->
+    <section id="kelola-stok" style="background:#0D0D0F;">
+      <div class="container" id="admin-container"></div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div><strong>Showroom iPhone</strong> · Bengkulu · Transaksi IDR</div>
+      <div style="display:flex; gap:16px; flex-wrap:wrap;">
+        <a href="#kelola-stok" id="footer-admin-link">Login Admin</a>
+        <a href="https://wa.me/628154047831" target="_blank" rel="noopener">WhatsApp +62 815-4047-831</a>
+      </div>
+    </div>
+  </footer>
+
+  <div class="mobile-bar">
+    <a href="#stok">Stok</a>
+    <a href="#tukar">Tukar</a>
+    <a href="#lokasi">Lokasi</a>
+    <a href="#kelola-stok" id="mobile-admin-link">Admin</a>
+  </div>
+
+  <!-- Modal Detail & Bandingkan -->
+  <div id="detail-modal" class="modal-backdrop">
+    <div class="modal-card" id="detail-modal-body"></div>
+  </div>
+
+  <div id="share-modal" class="modal-backdrop">
+    <div class="modal-card">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+        <h3>Bagikan Katalog Showroom</h3>
+        <button type="button" id="btn-share-close" class="btn-secondary">Tutup</button>
+      </div>
+      <p style="font-size:13px; color:var(--muted); margin-bottom:14px;">Salin tautan di bawah untuk dikirim ke pelanggan di Bengkulu.</p>
+      <div style="display:flex; gap:8px;">
+        <input id="share-url-input" class="input" readonly style="flex:1;" />
+        <button type="button" id="btn-copy-url" class="btn-primary">Salin</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js';
+    import { getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from 'https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js';
+    import { collection, deleteDoc, doc, getFirestore, onSnapshot, query, serverTimestamp, setDoc, updateDoc, where, writeBatch } from 'https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js';
+
+    const ADMIN_EMAIL = 'hrnangrn123@gmail.com';
+    const WA_NUMBER = '628154047831';
+    const firebaseConfig = {
+      projectId: 'sodium-pathway-z5gvv',
+      appId: '1:636774342118:web:efb3e11500e143d82d4a27',
+      apiKey: 'AIzaSyAWqAfgbWfDVNHUqbyg9wiEwiUTLCT_Zbo',
+      authDomain: 'sodium-pathway-z5gvv.firebaseapp.com',
+      storageBucket: 'sodium-pathway-z5gvv.firebasestorage.app',
+      messagingSenderId: '636774342118'
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app, 'ai-studio-palembangiphones-9470e641-7c06-4853-9362-e453611b35f4');
+    const auth = getAuth(app);
+    const googleProvider = new GoogleAuthProvider();
+    googleProvider.setCustomParameters({ prompt: 'select_account' });
+
+    const SERIES_LIST = ['Semua','11 Series','12 Series','13 Series','14 Series','15 Series','16 Series','17 Series'];
+    const STORAGE_OPTIONS = ['64GB','128GB','256GB','512GB','1TB','2TB'];
+    const COLOR_OPTIONS = [
+      'Black','Midnight','White','Starlight','Silver','Space Black','Space Gray','Graphite','Gold',
+      'Titanium Natural','Desert Titanium','Black Titanium','White Titanium','Blue Titanium',
+      'Sage Pacific Blue','Pacific Blue','Sierra Blue','Ultramarine','Blue','Teal','Sage Green',
+      'Alpine Green','Midnight Green','Green','Deep Purple','Purple','Pink','Yellow','Red (PRODUCT)RED'
+    ];
+    const TRADE_MODELS = [
+      { model: 'iPhone 11', base: 4200000 }, { model: 'iPhone 11 Pro Max', base: 5600000 },
+      { model: 'iPhone 12', base: 5400000 }, { model: 'iPhone 12 Pro Max', base: 7200000 },
+      { model: 'iPhone 13', base: 6800000 }, { model: 'iPhone 13 Pro', base: 8600000 },
+      { model: 'iPhone 14 Pro', base: 10800000 }, { model: 'iPhone 14 Pro Max', base: 12200000 },
+      { model: 'iPhone 15 Pro', base: 13800000 }, { model: 'iPhone 15 Pro Max', base: 15800000 },
+      { model: 'iPhone 16 Pro Max', base: 18500000 }
+    ];
+    const QC_LIST = [
+      ['01','Skor 3uTools 100%','Bebas ganti part non-original (layar, baterai, kamera).'],
+      ['02','Face ID & True Tone','Sensor biometrik dan tone layar berfungsi responsif.'],
+      ['03','Sinyal Resmi & Permanen','IMEI terverifikasi aman pakai kartu SIM Indonesia.'],
+      ['04','Battery Health Jujur','Dicek langsung melalui data cycle count asli.'],
+      ['05','Kamera & LiDAR Bersih','Bebas jamur, shadow, dan sensor fokus tajam.'],
+      ['06','Speaker & Mikrofon','Audio stereo atas bawah serta mic jernih.'],
+      ['07','Charging & Port','Pengisian kabel dan MagSafe berjalan stabil.'],
+      ['08','Garansi 30 Hari','Jaminan tukar unit atau servis jika ada kendala fungsi.']
+    ];
+    const DEFAULT_UNITS = [
+      { id:'ip14pm-128-purple-bkl', name:'iPhone 14 Pro Max', series:'14 Series', storage:'128GB', color:'Deep Purple', batteryHealth:100, cycleCount:12, condition:'Pristine', conditionNote:'Unit mulus istimewa ready Bengkulu, Battery Health 100% normal.', signalStatus:'Inter · Signal Normal', priceIdr:8750000, branch:'Bengkulu', image:'/src/assets/images/iphone_14_pro_purple_1795013251535.jpg', chip:'A16 Bionic', display:'6.7" Super Retina XDR ProMotion', camera:'48MP Triple Pro', port:'Lightning', warrantyDays:30, boxContents:'Unit + Box + Kabel Lightning Original', threeUToolsScore:100, stock:1 },
+      { id:'ip12pm-128-blue-bkl', name:'iPhone 12 Pro Max', series:'12 Series', storage:'128GB', color:'Sage Pacific Blue', batteryHealth:97, cycleCount:64, condition:'Pristine', conditionNote:'Terdaftar resmi Beacukai (IMEI Permanent), mulus siap pakai di Bengkulu.', signalStatus:'Beacukai · Permanent', priceIdr:6150000, branch:'Bengkulu', image:'/src/assets/images/iphone_12_pro_max_pacific_blue_1795015128770.jpg', chip:'A14 Bionic', display:'6.7" Super Retina XDR OLED', camera:'12MP Triple Pro + LiDAR', port:'Lightning', warrantyDays:30, boxContents:'Unit + Box + Kabel Lightning Original', threeUToolsScore:100, stock:1 },
+      { id:'ip17pm-256-silver', name:'iPhone 17 Pro Max', series:'17 Series', storage:'256GB', color:'Silver', batteryHealth:99, cycleCount:18, condition:'Pristine', conditionNote:'Mulus tanpa lecet bezel maupun layar.', signalStatus:'Inter · Signal Normal', priceIdr:23800000, branch:'Bengkulu', image:'/src/assets/images/iphone_17_pro_max_silver_1795013250272.jpg', chip:'A19 Pro (3nm)', display:'6.9" Super Retina XDR 120Hz', camera:'48MP Triple Fusion', port:'USB-C 10Gbps', warrantyDays:30, boxContents:'Unit + Box Original + Kabel USB-C', threeUToolsScore:100, stock:2 },
+      { id:'ip15pm-256-natural', name:'iPhone 15 Pro Max', series:'15 Series', storage:'256GB', color:'Titanium Natural', batteryHealth:94, cycleCount:98, condition:'Pristine', conditionNote:'Resmi iBox (PA/A), baterai masih sangat awet.', signalStatus:'iBox Resmi', priceIdr:16900000, branch:'Bengkulu', image:'/src/assets/images/iphone_15_pro_natural_1795013251962.jpg', chip:'A17 Pro', display:'6.7" Super Retina XDR 120Hz', camera:'48MP Main + 5x Telephoto', port:'USB-C 10Gbps', warrantyDays:30, boxContents:'Fullset Resmi iBox (PA/A)', threeUToolsScore:100, stock:2 }
+    ];
+
+    let state = {
+      user: null, authReady: false, units: [...DEFAULT_UNITS], seeded: false,
+      series: 'Semua', storage: 'Semua', color: 'Semua', search: '', sort: 'series-asc'
+    };
+
+    const fmtIdr = (v) => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(v);
+    const rankSeries = (s) => parseInt((s.match(/\d+/) || ['99'])[0], 10);
+    const isAdmin = () => Boolean(state.user && state.user.emailVerified && state.user.email?.toLowerCase() === ADMIN_EMAIL);
+    const colorSwatch = (c) => {
+      const n = c.toLowerCase();
+      if (n.includes('purple')) return '#6E5A7A';
+      if (n.includes('blue') || n.includes('ultramarine')) return '#3B5C78';
+      if (n.includes('teal') || n.includes('green')) return '#3F6A5E';
+      if (n.includes('pink')) return '#D98A9C';
+      if (n.includes('red')) return '#B8292F';
+      if (n.includes('yellow') || n.includes('gold') || n.includes('desert')) return '#C4A57B';
+      if (n.includes('silver') || n.includes('white') || n.includes('starlight')) return '#D8D8DC';
+      if (n.includes('natural')) return '#8F8A82';
+      return '#2C2C32';
+    };
+
+    function renderFallbackPhone(colorName) {
+      const hex = colorSwatch(colorName);
+      return `<svg viewBox="0 0 180 135" width="160" height="120" aria-hidden="true">
+        <rect x="46" y="10" width="88" height="115" rx="16" fill="${hex}" stroke="rgba(255,255,255,0.22)" stroke-width="2"/>
+        <rect x="54" y="18" width="32" height="34" rx="8" fill="rgba(11,11,12,0.45)" stroke="rgba(255,255,255,0.16)"/>
+        <circle cx="64" cy="28" r="5" fill="#111" stroke="#444" stroke-width="1.5"/>
+        <circle cx="64" cy="42" r="5" fill="#111" stroke="#444" stroke-width="1.5"/>
+        <circle cx="77" cy="35" r="5" fill="#111" stroke="#444" stroke-width="1.5"/>
+      </svg>`;
+    }
+
+    function renderFilters() {
+      const tabsEl = document.getElementById('series-tabs');
+      tabsEl.innerHTML = SERIES_LIST.map((s) =>
+        `<button type="button" class="tab-btn ${state.series === s ? 'active' : ''}" data-series="${s}">${s === 'Semua' ? 'Semua' : 'iPhone ' + s.replace(' Series','')}</button>`
+      ).join('');
+      tabsEl.querySelectorAll('button').forEach((btn) => {
+        btn.onclick = () => { state.series = btn.dataset.series; renderAll(); };
+      });
+
+      const storEl = document.getElementById('storage-filter');
+      storEl.innerHTML = ['Semua', ...STORAGE_OPTIONS].map((s) => `<option value="${s}" ${state.storage === s ? 'selected' : ''}>Memori: ${s}</option>`).join('');
+      storEl.onchange = () => { state.storage = storEl.value; renderCatalog(); };
+
+      const colEl = document.getElementById('color-filter');
+      colEl.innerHTML = ['Semua', ...COLOR_OPTIONS].map((c) => `<option value="${c}" ${state.color === c ? 'selected' : ''}>Warna: ${c}</option>`).join('');
+      colEl.onchange = () => { state.color = colEl.value; renderCatalog(); };
+    }
+
+    function getFilteredUnits() {
+      const q = state.search.trim().toLowerCase();
+      let list = state.units.filter((u) => {
+        if (state.series !== 'Semua' && u.series !== state.series) return false;
+        if (state.storage !== 'Semua' && u.storage !== state.storage) return false;
+        if (state.color !== 'Semua' && u.color !== state.color) return false;
+        if (q && !`${u.name} ${u.storage} ${u.color} ${u.signalStatus}`.toLowerCase().includes(q)) return false;
+        return true;
+      });
+      if (state.sort === 'series-asc') list.sort((a,b) => rankSeries(a.series) - rankSeries(b.series));
+      if (state.sort === 'series-desc') list.sort((a,b) => rankSeries(b.series) - rankSeries(a.series));
+      if (state.sort === 'price-asc') list.sort((a,b) => a.priceIdr - b.priceIdr);
+      if (state.sort === 'price-desc') list.sort((a,b) => b.priceIdr - a.priceIdr);
+      if (state.sort === 'bh-desc') list.sort((a,b) => b.batteryHealth - a.batteryHealth);
+      return list;
+    }
+
+    function renderCatalog() {
+      const list = getFilteredUnits();
+      document.getElementById('catalog-count').textContent = `Menampilkan ${list.length} dari ${state.units.length} unit ready cabang Bengkulu.`;
+      const grid = document.getElementById('catalog-grid');
+      if (!list.length) {
+        grid.innerHTML = `<div class="panel" style="grid-column:1/-1; text-align:center;">Tidak ada unit yang cocok dengan filter Anda.</div>`;
+        return;
+      }
+      grid.innerHTML = list.map((u) => {
+        const wa = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(`Halo Showroom iPhone Bengkulu, saya minat ${u.name} ${u.storage} (${u.color}) harga ${fmtIdr(u.priceIdr)}.`)}`;
+        return `<article class="card">
+          <div class="card-media">
+            ${renderFallbackPhone(u.color)}
+          </div>
+          <div class="card-body">
+            <div class="meta-line">BH ${u.batteryHealth}% · ${u.condition} · ${u.stock > 0 ? 'Stok ' + u.stock : 'Habis'}</div>
+            <div class="card-title">${u.name}</div>
+            <div class="meta-line">${u.storage} · ${u.color} · ${u.signalStatus}</div>
+            <div class="card-price mono">${fmtIdr(u.priceIdr)}</div>
+            <div class="card-actions">
+              <button type="button" class="btn-secondary" data-detail="${u.id}">Detail</button>
+              <a class="btn-primary" href="${wa}" target="_blank" rel="noopener">Booking WA</a>
+            </div>
+          </div>
+        </article>`;
+      }).join('');
+      grid.querySelectorAll('[data-detail]').forEach((b) => {
+        b.onclick = () => openDetail(b.dataset.detail);
+      });
+    }
+
+    function openDetail(id) {
+      const u = state.units.find((x) => x.id === id);
+      if (!u) return;
+      const modal = document.getElementById('detail-modal');
+      const wa = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(`Halo admin, saya ingin booking ${u.name} ${u.storage} ${u.color} (${fmtIdr(u.priceIdr)}).`)}`;
+      document.getElementById('detail-modal-body').innerHTML = `
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+          <h3>${u.name} (${u.storage})</h3>
+          <button type="button" id="close-detail" class="btn-secondary">Tutup</button>
+        </div>
+        <p style="font-size:13px; color:var(--muted); margin-bottom:14px;">${u.conditionNote}</p>
+        <div style="display:grid; gap:8px; font-size:13px; margin-bottom:18px;">
+          <div><strong>Harga:</strong> <span class="mono" style="color:var(--accent);">${fmtIdr(u.priceIdr)}</span></div>
+          <div><strong>Warna:</strong> ${u.color} · <strong>Sinyal:</strong> ${u.signalStatus}</div>
+          <div><strong>Battery Health:</strong> ${u.batteryHealth}% (Cycle ${u.cycleCount}x) · <strong>3uTools:</strong> ${u.threeUToolsScore}%</div>
+          <div><strong>Kelengkapan:</strong> ${u.boxContents}</div>
+        </div>
+        <a href="${wa}" target="_blank" rel="noopener" class="btn-primary" style="width:100%; justify-content:center; padding:12px;">Pesan Unit via WhatsApp</a>
+      `;
+      modal.classList.add('open');
+      document.getElementById('close-detail').onclick = () => modal.classList.remove('open');
+    }
+
+    function renderTradeIn() {
+      const modelEl = document.getElementById('ti-model');
+      const targetEl = document.getElementById('ti-target');
+      if (!modelEl.options.length) {
+        modelEl.innerHTML = TRADE_MODELS.map((m) => `<option value="${m.model}">${m.model}</option>`).join('');
+      }
+      targetEl.innerHTML = [...state.units].sort((a,b) => rankSeries(a.series)-rankSeries(b.series))
+        .map((u) => `<option value="${u.id}">${u.name} ${u.storage} — ${fmtIdr(u.priceIdr)}</option>`).join('');
+
+      const calc = () => {
+        const m = TRADE_MODELS.find((x) => x.model === modelEl.value) || TRADE_MODELS[0];
+        const bonus = { '64GB':-400000,'128GB':0,'256GB':900000,'512GB':1800000,'1TB':2700000,'2TB':3600000 }[document.getElementById('ti-storage').value] || 0;
+        const bh = parseFloat(document.getElementById('ti-bh').value);
+        const body = parseFloat(document.getElementById('ti-body').value);
+        const val = Math.max(1500000, Math.round(((m.base + bonus) * bh * body) / 100000) * 100000);
+        const target = state.units.find((u) => u.id === targetEl.value) || state.units[0];
+        const topup = Math.max(0, target.priceIdr - val);
+        document.getElementById('ti-target-price').textContent = fmtIdr(target.priceIdr);
+        document.getElementById('ti-old-val').textContent = '- ' + fmtIdr(val);
+        document.getElementById('ti-topup').textContent = fmtIdr(topup);
+        document.getElementById('ti-wa').href = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(`Halo admin, saya ingin Tukar Tambah ${m.model} ke ${target.name} ${target.storage}. Estimasi selisih: ${fmtIdr(topup)}.`)}`;
+      };
+      ['ti-model','ti-storage','ti-bh','ti-body','ti-target'].forEach((id) => {
+        document.getElementById(id).onchange = calc;
+      });
+      calc();
+    }
+
+    function renderAdminPanel() {
+      const box = document.getElementById('admin-container');
+      const adminOk = isAdmin();
+      document.getElementById('nav-admin-link').classList.toggle('hidden', !adminOk);
+      document.getElementById('footer-admin-link').textContent = adminOk ? 'Panel Kelola Stok' : 'Login Admin';
+
+      if (!adminOk) {
+        box.innerHTML = `<div class="panel" style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:18px;">
+          <div>
+            <div style="font-size:12px; color:var(--accent); margin-bottom:4px;">Akses Pemilik Showroom</div>
+            <h2 style="font-size:22px;">Panel Kelola Stok Terkunci</h2>
+            <p class="sec-sub">Hanya akun Google pemilik (${ADMIN_EMAIL}) yang dapat menambah unit, mengedit harga, atau mengurangi stok.</p>
+            ${state.user ? `<p style="font-size:13px; color:var(--amber); margin-top:8px;">Akun ${state.user.email} tidak memiliki akses admin.</p>` : ''}
+          </div>
+          <div>
+            ${state.user
+              ? `<button type="button" id="btn-logout" class="btn-secondary">Ganti Akun Google</button>`
+              : `<button type="button" id="btn-login" class="btn-primary">Login Admin dengan Google</button>`}
+          </div>
+        </div>`;
+        if (document.getElementById('btn-login')) {
+          document.getElementById('btn-login').onclick = () => signInWithPopup(auth, googleProvider).catch(() => {});
+        }
+        if (document.getElementById('btn-logout')) {
+          document.getElementById('btn-logout').onclick = () => signOut(auth);
+        }
+        return;
+      }
+
+      const ordered = [...state.units].sort((a,b) => rankSeries(a.series)-rankSeries(b.series));
+      box.innerHTML = `
+        <div class="sec-head">
+          <div>
+            <h2>Panel Kelola Stok Showroom</h2>
+            <p class="sec-sub">Login sebagai ${state.user.email} · Perubahan tersinkron real-time ke seluruh pembeli.</p>
+          </div>
+          <button type="button" id="btn-logout-admin" class="btn-secondary">Keluar Admin</button>
+        </div>
+        <div class="panel" style="display:grid; gap:14px;">
+          <form id="add-unit-form" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(170px, 1fr)); gap:10px; padding-bottom:16px; border-bottom:1px solid var(--border);">
+            <input id="new-name" class="input" required placeholder="Nama (mis. iPhone 15 Pro)" />
+            <select id="new-series" class="input">${SERIES_LIST.filter(s=>s!=='Semua').map(s=>`<option value="${s}">${s}</option>`).join('')}</select>
+            <select id="new-storage" class="input">${STORAGE_OPTIONS.map(s=>`<option>${s}</option>`).join('')}</select>
+            <select id="new-color" class="input">${COLOR_OPTIONS.map(c=>`<option>${c}</option>`).join('')}</select>
+            <input id="new-price" class="input mono" type="number" min="500000" step="100000" value="15000000" required />
+            <input id="new-bh" class="input mono" type="number" min="50" max="100" value="95" required />
+            <input id="new-stock" class="input mono" type="number" min="0" max="99" value="1" required />
+            <button type="submit" class="btn-primary" style="justify-content:center;">+ Tambah Unit</button>
+          </form>
+          ${ordered.map((u) => `
+            <div class="stock-row">
+              <div>
+                <div style="font-weight:700;">${u.name}</div>
+                <div style="font-size:12px; color:var(--muted);">${u.storage} · ${u.color} · BH ${u.batteryHealth}%</div>
+              </div>
+              <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+                <span class="mono" style="color:var(--accent); font-weight:700;">${fmtIdr(u.priceIdr)}</span>
+                <div class="stepper">
+                  <button type="button" data-adj="${u.id}:-1" ${u.stock<=0?'disabled':''}>-</button>
+                  <span class="mono">${u.stock} unit</span>
+                  <button type="button" data-adj="${u.id}:1">+</button>
+                </div>
+                <button type="button" class="btn-secondary" data-del="${u.id}">Hapus</button>
+              </div>
+            </div>`).join('')}
+        </div>`;
+
+      document.getElementById('btn-logout-admin').onclick = () => signOut(auth);
+      document.getElementById('add-unit-form').onsubmit = async (e) => {
+        e.preventDefault();
+        const id = `unit-${Date.now()}`;
+        await setDoc(doc(db, 'units', id), {
+          id, name: document.getElementById('new-name').value.trim().slice(0,80),
+          series: document.getElementById('new-series').value,
+          storage: document.getElementById('new-storage').value,
+          color: document.getElementById('new-color').value,
+          batteryHealth: Math.min(100, Math.max(50, Number(document.getElementById('new-bh').value) || 95)),
+          cycleCount: 30, condition: 'Pristine', conditionNote: 'Unit terinspeksi showroom, semua fungsi normal.',
+          signalStatus: 'iBox Resmi',
+          priceIdr: Math.max(100000, Number(document.getElementById('new-price').value) || 10000000),
+          branch: 'Bengkulu', image: '/src/assets/images/iphone_15_pro_natural_1795013251962.jpg',
+          chip: 'Apple Silicon', display: 'Super Retina XDR', camera: 'Pro Camera System', port: 'USB-C',
+          warrantyDays: 30, boxContents: 'Unit + Box + Kabel Data', threeUToolsScore: 100,
+          stock: Math.max(0, Number(document.getElementById('new-stock').value) || 1),
+          updatedAt: serverTimestamp(), updatedByUid: state.user.uid
+        });
+      };
+      box.querySelectorAll('[data-adj]').forEach((b) => {
+        b.onclick = async () => {
+          const [id, d] = b.dataset.adj.split(':');
+          const target = state.units.find((x) => x.id === id);
+          if (!target) return;
+          await updateDoc(doc(db, 'units', id), {
+            stock: Math.max(0, target.stock + Number(d)),
+            updatedAt: serverTimestamp(), updatedByUid: state.user.uid
+          });
+        };
+      });
+      box.querySelectorAll('[data-del]').forEach((b) => {
+        b.onclick = async () => { await deleteDoc(doc(db, 'units', b.dataset.del)); };
+      });
+    }
+
+    function renderAll() {
+      renderFilters();
+      renderCatalog();
+      renderTradeIn();
+      renderAdminPanel();
+    }
+
+    // Init UI events
+    document.getElementById('qc-grid').innerHTML = QC_LIST.map(([code, title, desc]) =>
+      `<div><div style="font-weight:600; font-size:14px;">${code}. ${title}</div><p style="font-size:12px; color:var(--muted); margin-top:4px;">${desc}</p></div>`
+    ).join('');
+    document.querySelectorAll('[data-tooltab]').forEach((b) => {
+      b.onclick = () => {
+        document.querySelectorAll('[data-tooltab]').forEach((x) => x.classList.remove('active'));
+        b.classList.add('active');
+        document.getElementById('tool-tukar').classList.toggle('hidden', b.dataset.tooltab !== 'tukar');
+        document.getElementById('tool-qc').classList.toggle('hidden', b.dataset.tooltab !== 'qc');
+      };
+    });
+    document.getElementById('search-input').oninput = (e) => { state.search = e.target.value; renderCatalog(); };
+    document.getElementById('sort-select').onchange = (e) => { state.sort = e.target.value; renderCatalog(); };
+    document.getElementById('btn-share-open').onclick = () => {
+      document.getElementById('share-url-input').value = window.location.href;
+      document.getElementById('share-modal').classList.add('open');
+    };
+    document.getElementById('btn-share-close').onclick = () => document.getElementById('share-modal').classList.remove('open');
+    document.getElementById('btn-copy-url').onclick = () => navigator.clipboard?.writeText(window.location.href);
+
+    onAuthStateChanged(auth, (u) => {
+      state.user = u; state.authReady = true; renderAdminPanel();
+    });
+
+    onSnapshot(query(collection(db, 'units'), where('branch', '==', 'Bengkulu')), (snap) => {
+      if (!snap.empty) {
+        state.units = snap.docs.map((d) => ({ ...d.data(), id: d.id }));
+      }
+      renderAll();
+    });
+
+    renderAll();
+  </script>
+</body>
+</html>
